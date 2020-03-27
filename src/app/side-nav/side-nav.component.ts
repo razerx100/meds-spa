@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-side-nav',
@@ -10,9 +7,27 @@ import { map, shareReplay } from 'rxjs/operators';
 })
 export class SideNavComponent implements OnInit {
 
-  constructor(private breakpoint_observer: BreakpointObserver) { }
+  username: string;
+  constructor() { }
 
   ngOnInit(): void {
   }
 
+  logged_user(): boolean {
+    if(sessionStorage.getItem('user')){
+      this.get_user();
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  logout_user(): void {
+    sessionStorage.removeItem('user');
+  }
+
+  get_user(): void {
+    this.username = sessionStorage.getItem('user');
+  }
 }

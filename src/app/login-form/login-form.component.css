@@ -1,0 +1,9 @@
+.login_form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.user_input {
+    width: 100%;
+}

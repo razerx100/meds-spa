@@ -1,0 +1,14 @@
+<div *ngIf = "!(is_handset | async)!.matches; else handset">
+    <mat-grid-list cols="3" rowHeight="1:1">
+        <mat-grid-tile></mat-grid-tile>
+        <mat-grid-tile>
+            <app-login-form></app-login-form>
+        </mat-grid-tile>
+        <mat-grid-tile></mat-grid-tile>
+    </mat-grid-list>
+</div>
+<ng-template #handset>
+    <div class="handset_form">
+        <app-login-form></app-login-form>
+    </div>
+</ng-template>
