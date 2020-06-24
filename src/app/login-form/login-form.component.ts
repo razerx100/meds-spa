@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { LoginService } from '../Services/login.service';
+import { Auth_result } from '../interfaces/auth';
+
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -9,6 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginFormComponent implements OnInit {
 
   hide = true;
+  auth_result : Auth_result;
   login_form_group = new FormGroup({
     username: new FormControl('', [
       Validators.required
@@ -19,7 +23,7 @@ export class LoginFormComponent implements OnInit {
     ])
   });
 
-  constructor() { }
+  constructor(private login_service: LoginService) { }
 
   ngOnInit(): void {
   }
@@ -32,10 +36,12 @@ export class LoginFormComponent implements OnInit {
     return this.login_form_group.get('password');
   }
 
-  save_user(): void {
-    if(!sessionStorage.getItem('user')){
-      sessionStorage.setItem('user', this.login_form_group.value.username);
-    }
+  check_user(): void {
+    this.login_service.check_user(this.username.value, this.password.value).subscribe(result => {
+      this.auth_result = result;
+      if(this.auth_result.Auth == "Successful"){
+        document.cookie = `current_user=${this.username.value}`
+      }
+    });
   }
-
 }

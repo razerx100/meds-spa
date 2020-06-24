@@ -28,6 +28,11 @@ export class SideNavComponent implements OnInit {
   }
 
   get_user(): void {
-    this.username = sessionStorage.getItem('user');
+    if(document.cookie){
+      const data = document.cookie.split("=")
+      if(data[0] == "current_user"){
+        this.username = data[1];
+      }
+    }
   }
 }

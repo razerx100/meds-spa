@@ -1,4 +1,4 @@
-<form [formGroup] = "login_form_group" (ngSubmit) = "save_user()" class="login_form">
+<form [formGroup] = "login_form_group" (ngSubmit) = "check_user()" class="login_form">
     <mat-form-field class="user_input">
         <mat-label>Username</mat-label>
         <input matInput placeholder="Write your username" formControlName="username">
